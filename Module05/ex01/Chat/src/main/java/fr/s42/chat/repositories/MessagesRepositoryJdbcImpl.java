@@ -18,7 +18,7 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 	@Override
 	public Optional<Message> findById(Long id) {
 
-		String SQL_QUERY =  "SELECT * FROM messages JOIN users ON messages.author_id = users.user_id INNER JOIN chatrooms ON messages.chatroom_id = chatrooms.chatroom_id WHERE messages.message_id = ?;";
+		String SQL_QUERY =  "SELECT * FROM message JOIN users ON message.author_id = users.user_id INNER JOIN chatroom ON message.chatroom_id = chatroom.chatroom_id WHERE message.message_id = ?;";
 
 		try (Connection con = dataSource.getConnection();
 		PreparedStatement ps = con.prepareStatement(SQL_QUERY))

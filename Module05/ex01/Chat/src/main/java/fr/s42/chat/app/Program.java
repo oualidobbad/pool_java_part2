@@ -28,7 +28,7 @@ public class Program {
 			else
 				System.out.println("not found");
 			dataSource.close();
-
+			sc.close();
 		}catch(Exception e)
 		{
 			System.err.println(e.getMessage());

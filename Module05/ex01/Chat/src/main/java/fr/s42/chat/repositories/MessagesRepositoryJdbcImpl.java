@@ -3,6 +3,8 @@ package fr.s42.chat.repositories;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import fr.s42.chat.models.*;
 
@@ -18,7 +20,7 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 	@Override
 	public Optional<Message> findById(Long id) {
 
-		String SQL_QUERY =  "SELECT * FROM message JOIN users ON message.author_id = users.user_id INNER JOIN chatroom ON message.chatroom_id = chatroom.chatroom_id WHERE message.message_id = ?;";
+		String SQL_QUERY = "SELECT * FROM message JOIN users ON message.author_id = users.user_id INNER JOIN chatroom ON message.chatroom_id = chatroom.chatroom_id WHERE message.message_id = ?;";
 
 		try (Connection con = dataSource.getConnection();
 		PreparedStatement ps = con.prepareStatement(SQL_QUERY))
@@ -34,9 +36,8 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 					
 					// 2. Build the Chatroom
 					Chatroom room = new Chatroom();
-					room.setId(res.getLong("chatroom_id")); // Make sure this matches your DB column name
+					room.setId(res.getLong("chatroom_id")); 
 					room.setName(res.getString("name"));
-					// We skip room.setOnwer() because we don't have a User object for the owner right now.
 
 					// 3. Build the Message
 					Message message = new Message();
@@ -46,11 +47,13 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 					
 					// Check your DB schema: is the column named "text" or "message"?
 					message.setText(res.getString("text")); 
-					
 					// Fixed: Get the Timestamp and convert it to Java's LocalDateTime
-					if (res.getTimestamp("date_time") != null) {
-						message.setDateTime(res.getTimestamp("date_time").toLocalDateTime());
-					}
+					
+					DateTimeFormatter dbFormat    = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+					DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+
+					LocalDateTime dt = LocalDateTime.parse(res.getString("date_time"), dbFormat);
+					message.setDateTime(dt.format(outputFormat));
 
 					// 4. Return the finished product!
 					return Optional.of(message);

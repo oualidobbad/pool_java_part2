@@ -1,5 +1,5 @@
 package fr.s42.chat.models;
-import java.time.LocalDateTime;
+// import java.time.String;
 import java.util.Objects;
 
 public class Message {
@@ -7,7 +7,7 @@ public class Message {
 	private User author;
 	private Chatroom room;
 	private String text;
-	private LocalDateTime dateTime;
+	private String dateTime;
 	// getters
 	public Long getId() {
 		return id;
@@ -21,7 +21,7 @@ public class Message {
 	public String getText() {
 		return text;
 	}
-	public LocalDateTime getDateTime() {
+	public String getDateTime() {
 		return dateTime;
 	}
 
@@ -37,7 +37,7 @@ public class Message {
 	}
 	public void setText(String text) {
 		this.text = text;
-	}public void setDateTime(LocalDateTime dateTime) {
+	}public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
 
@@ -47,7 +47,7 @@ public class Message {
 	}
 	@Override
 	public String toString() {
-		return "id: "+id+", author: "+author.toString()+", room: "+room.toString()+", text: "+text+", date: " +dateTime;
+		return "message : {\n      id= "+id+",\n      author= "+author+",\n      room= "+room+",\n      text= "+text+",\n      date= " +dateTime+"\n     }";
 	}
 	@Override
 	public boolean equals(Object obj) {

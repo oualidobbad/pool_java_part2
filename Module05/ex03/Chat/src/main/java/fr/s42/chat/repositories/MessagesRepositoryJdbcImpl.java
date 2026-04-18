@@ -28,30 +28,27 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 			ps.setLong(1, id);
 			try (ResultSet res = ps.executeQuery();) {
 				if (res.next()) {
-					// 1. Build the User (Author)
 					User user = new User();
 					user.setId(res.getLong("user_id"));
 					user.setLogin(res.getString("login"));
 					user.setPassword(res.getString("password"));
 
-					// 2. Build the Chatroom
 					Chatroom room = new Chatroom();
 					room.setId(res.getLong("chatroom_id"));
 					room.setName(res.getString("name"));
 
-					// 3. Build the Message
 					Message message = new Message();
 					message.setId(res.getLong("message_id"));
 					message.setAuthor(user);
-					message.setRoom(room); // Fixed: We attached the room!
-
-					// Check your DB schema: is the column named "text" or "message"?
+					message.setRoom(room);
 					message.setText(res.getString("text"));
-					
-					// Fixed: Get the Timestamp and convert it to Java's LocalDateTime
-					message.setDateTime(LocalDateTime.parse(res.getString("date_time")));
 
-					// 4. Return the finished product!
+					if (res.getTimestamp("date_time") != null) {
+						message.setDateTime(res.getTimestamp("date_time").toLocalDateTime());
+					} else {
+						message.setDateTime(null);
+					}
+
 					return Optional.of(message);
 				} else
 					System.out.println("the ID doesn't exist");
@@ -74,11 +71,10 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 		if (message.getRoom() == null || message.getRoom().getId() == null)
 			throw new NotSavedSubEntityException("Error: room not found!");
 
-		String SQL_QUERY = "INSERT INTO "
-						+"message(author_id, chatroom_id, text, date_time) "
-						+"VALUES (?,?,?,?);";
+		String SQL_QUERY = "INSERT INTO message(author_id, chatroom_id, text, date_time) VALUES (?,?,?,?);";
+
 		try (Connection con = dataSource.getConnection();
-	        PreparedStatement pre = con.prepareStatement(SQL_QUERY, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+				PreparedStatement pre = con.prepareStatement(SQL_QUERY, java.sql.Statement.RETURN_GENERATED_KEYS)) {
 			pre.setLong(1, message.getAuthor().getId());
 			pre.setLong(2, message.getRoom().getId());
 			pre.setString(3, message.getText());
@@ -87,11 +83,34 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 			ResultSet rs = pre.getGeneratedKeys();
 			if (rs.next())
 				message.setId(rs.getLong(1));
-			
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-				
+
+	}
+
+	@Override
+	public void update(Message message) {
+		String SQL_QUERY = "UPDATE message SET author_id = ?, chatroom_id = ?, text = ?, date_time = ? WHERE message_id = ?;";
+
+		try (Connection con = dataSource.getConnection();
+				PreparedStatement ps = con.prepareStatement(SQL_QUERY)) {
+			ps.setLong(1, message.getAuthor().getId());
+			ps.setLong(2, message.getRoom().getId());
+			ps.setString(3, message.getText());
+
+			if (message.getDateTime() == null)
+				ps.setNull(4, java.sql.Types.TIMESTAMP);
+			else
+				ps.setTimestamp(4, java.sql.Timestamp.valueOf(message.getDateTime()));
+
+			ps.setLong(5, message.getId());
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 }

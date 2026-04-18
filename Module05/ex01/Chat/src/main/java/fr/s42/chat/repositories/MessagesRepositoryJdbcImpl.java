@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import fr.s42.chat.models.*;
-import fr.s42.chat.exceptions.*;
 
 import javax.sql.DataSource;
 

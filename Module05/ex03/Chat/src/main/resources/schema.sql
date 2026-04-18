@@ -16,7 +16,7 @@ CREATE TABLE Message(
     author_id INT NOT NULL,
     chatroom_id INT NOT NULL,
     text TEXT NOT NULL,
-    date_time TIMESTAMP NOT NULL,
+    date_time TIMESTAMP,
     FOREIGN KEY (author_id) REFERENCES Users(user_id),
     FOREIGN KEY (chatroom_id) REFERENCES Chatroom(chatroom_id)
 );

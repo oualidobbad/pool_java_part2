@@ -19,19 +19,22 @@ public class Program {
 			config.setPassword("1234");
 			try (HikariDataSource dataSource = new HikariDataSource(config);)
 			{
-				MessagesRepository mRepository = new MessagesRepositoryJdbcImpl(dataSource);
-				User creator = new User(2L, "bob", "bob123", new ArrayList(), new ArrayList());
-				User author = creator;
-				Chatroom room = new Chatroom(2L, "PostgreSQL Help", creator, new ArrayList());
-				Message message = new Message(null, author, room, "Hello!", LocalDateTime.now());
-				mRepository.save(message);
-				System.out.println(message.getId()); // ex. id == 11
+				MessagesRepository mr = new MessagesRepositoryJdbcImpl(dataSource);
+				
+				Optional<Message> messageOptional = mr.findById(3L);
+				if (messageOptional.isPresent()) {
+					Message message = messageOptional.get();
+					message.setText("Bye");
+					message.setDateTime(null);
+					mr.update(message);
+				}
+				else
+					System.err.println("invalid: Id Of Message Not Found");
 			}
 		}catch(Exception e)
 		{
 			System.err.println(e.getMessage());
 		}
 	}
-
 }
 

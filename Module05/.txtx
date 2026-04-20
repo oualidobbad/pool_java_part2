@@ -1,0 +1,11 @@
+WITH PaginatedUsers AS 
+(SELECT * FROM Users
+ORDER BY user_id 
+LIMIT 3 OFFSET 2) 
+SELECT 
+PaginatedUsers.user_id, PaginatedUsers.login, PaginatedUsers.password, 
+created_room.chatroom_id AS c_id, created_room.name AS c_name, social_room.chatroom_id AS s_id, social_room.name AS s_name 
+FROM PaginatedUsers 
+LEFT JOIN Chatroom AS created_room ON PaginatedUsers.user_id = created_room.owner_id 
+LEFT JOIN User_Chatrooms ON PaginatedUsers.user_id = User_Chatrooms.user_id 
+LEFT JOIN Chatroom AS social_room ON User_Chatrooms.chatroom_id = social_room.chatroom_id;

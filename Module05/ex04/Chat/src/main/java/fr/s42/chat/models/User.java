@@ -8,6 +8,7 @@ public class User {
     private String password;
     private List<Chatroom> createdRooms;
     private List<Chatroom> socializedRooms;
+    
 	public User(){}
 	public User(Long id, String login, String password, List<Chatroom> createdRooms, List<Chatroom> socializedRooms){
 		this.id = id;

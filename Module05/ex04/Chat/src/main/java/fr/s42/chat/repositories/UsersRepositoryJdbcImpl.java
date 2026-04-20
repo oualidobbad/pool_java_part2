@@ -1,12 +1,15 @@
 package fr.s42.chat.repositories;
-import fr.s42.chat.models.User;
+import fr.s42.chat.models.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 public class UsersRepositoryJdbcImpl implements UsersRepository {
@@ -30,27 +33,46 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
 		"LEFT JOIN Chatroom AS created_room ON PaginatedUsers.user_id = created_room.owner_id "+
 		"LEFT JOIN User_Chatrooms ON PaginatedUsers.user_id = User_Chatrooms.user_id "+
 		"LEFT JOIN Chatroom AS social_room ON User_Chatrooms.chatroom_id = social_room.chatroom_id;";
+
+		
 		try (Connection con = dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(SQL_QUERY))
 		{
 			ps.setLong(1, size);
 			ps.setLong(2, size * page);
-			List<User> users = new ArrayList<>();
-			List<Chatroom> cRoom = new ArrayList<>();
-			List<Chatroom> sRoom = new ArrayList<>();
 
 			ResultSet rs = ps.executeQuery();
+			Map <Long, User> mapUsers = new LinkedHashMap<>();
 
 			while (rs.next())
 			{
-				User user = new User(rs.getLong("user_id"),rs.getString("login"), rs.getString("password"), , null);
+				Long id = rs.getLong("user_id");
+				if (!mapUsers.containsKey(id))
+				{
+					mapUsers.put(id, new User(id, rs.getString("login"), rs.getString("password"), new ArrayList<>(), new ArrayList<>()));
+				}
+				User targetUser = mapUsers.get(id);
+				long c_id = rs.getLong("c_id");
+				long s_id = rs.getLong("s_id");
+				if (c_id != 0)
+				{
+					boolean isIn = targetUser.getCreatedRooms().stream().anyMatch(r -> r.getId() == c_id);
+					if (!isIn)
+						targetUser.getCreatedRooms().add(new Chatroom(c_id, rs.getString("c_name"), targetUser, new ArrayList<>()));
+				}
+				if (s_id != 0)
+				{
+					boolean isIn = targetUser.getSocializedRooms().stream().anyMatch(r -> r.getId() == s_id);
+					if (!isIn)
+						targetUser.getSocializedRooms().add(new Chatroom(s_id, rs.getString("s_name"), targetUser, new ArrayList<>()));
+				}
 			}
+			List<User> listUser =  new ArrayList<>(mapUsers.values());
+			return listUser;
 		} catch (Exception e) {
-
 			System.err.println(e.getMessage());
 		}
-
-		return new LinkedList<>();
+		return null;
 	}
 }
 

@@ -18,6 +18,7 @@ public class Program {
 			config.setJdbcUrl("jdbc:postgresql://174.138.65.179:5432/app");
 			config.setUsername("oobbad");
 			config.setPassword("1234");
+
 			try (HikariDataSource dataSource = new HikariDataSource(config);)
 			{
 				MessagesRepository mr = new MessagesRepositoryJdbcImpl(dataSource);

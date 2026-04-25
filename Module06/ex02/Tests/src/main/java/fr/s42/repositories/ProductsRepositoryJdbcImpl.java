@@ -99,8 +99,15 @@ public class ProductsRepositoryJdbcImpl implements ProductsRepository{
 	}
 
 	@Override
-	public void delete(Long id) {		
+	public void delete(Long id) {
+		String SQL_QUERY = "DELETE FROM product WHERE id = ?;";
+		try (Connection con = dataSource.getConnection();
+		PreparedStatement ps = con.prepareStatement(SQL_QUERY)) {
+			ps.setLong(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}	
 	}
 
-    
 }

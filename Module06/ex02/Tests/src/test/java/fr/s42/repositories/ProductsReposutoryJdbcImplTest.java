@@ -87,4 +87,10 @@ public class ProductsReposutoryJdbcImplTest {
 		assertTrue(productFinded.isPresent());
 		assertEquals(pr, productFinded.get());
 	}
+	@Test 
+	void testDelete(){
+		pJdbcImpl.delete(1L);
+		Optional<Product> pr = pJdbcImpl.findById(1L);
+		assertTrue(pr.isEmpty());
+	}
 }

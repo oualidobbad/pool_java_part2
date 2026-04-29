@@ -178,10 +178,13 @@ public class UsersServiceImplTest {
 ## Folder Structure
 ```
 ex00/
-
+    ![alt text](image.png)
 ex01/
+    ![alt text](image-1.png)
 ex02/
+    ![alt text](image-2.png)
 ex03/
+    ![alt text](image-3.png)
 ```
 
 ## Deployment

@@ -1,9 +1,0 @@
-fr/s42/numbers/NumberWorker.class
-fr/s42/numbers/IllegalNumberException.class
-fr/s42/repositories/ProductsRepositoryJdbcImpl.class
-fr/s42/repositories/ProductsRepository.class
-fr/s42/models/Product.class
-fr/s42/services/UsersServiceImpl.class
-fr/s42/exceptions/AlreadyAuthenticatedException.class
-fr/s42/repositories/UsersRepository.class
-fr/s42/models/User.class

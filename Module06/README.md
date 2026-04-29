@@ -177,14 +177,105 @@ public class UsersServiceImplTest {
 
 ## Folder Structure
 ```
-ex00/
-    ![alt text](image.png)
-ex01/
-    ![alt text](image-1.png)
-ex02/
-    ![alt text](image-2.png)
-ex03/
-    ![alt text](image-3.png)
+.
+├── README.md
+├── ex00/
+│   └── Tests/
+│       ├── pom.xml
+│       └── src/
+│           ├── main/
+│           │   └── java/
+│           │       └── fr.s42.numbers/
+│           │                   ├── IllegalNumberException.java
+│           │                   └── NumberWorker.java
+│           └── test/
+│               ├── java/
+│               │   └── fr.s42.numbers/
+│               │               └── NumberWorkerTest.java
+│               └── resources/
+│                   └── data.csv
+├── ex01/
+│   └── Tests/
+│       ├── pom.xml
+│       └── src/
+│           ├── main/
+│           │   └── java/
+│           │       └── fr.s42.numbers/
+│           │                   ├── IllegalNumberException.java
+│           │                   └── NumberWorker.java
+│           └── test/
+│               ├── java/
+│               │   └── fr.s42/
+│               │           ├── numbers/
+│               │           │   └── NumberWorkerTest.java
+│               │           └── repositories/
+│               │               └── EmbeddedDataSourceTest.java
+│               └── resources/
+│                   ├── data.csv
+│                   ├── data.sql
+│                   └── schema.sql
+├── ex02/
+│   └── Tests/
+│       ├── pom.xml
+│       └── src/
+│           ├── main/
+│           │   └── java/
+│           │       └── fr.s42/
+│           │               ├── models/
+│           │               │   └── Product.java
+│           │               ├── numbers/
+│           │               │   ├── IllegalNumberException.java
+│           │               │   └── NumberWorker.java
+│           │               └── repositories/
+│           │                   ├── ProductsRepository.java
+│           │                   └── ProductsRepositoryJdbcImpl.java
+│           └── test/
+│               ├── java/
+│               │   └── fr.s42/
+│               │           ├── numbers/
+│               │           │   └── NumberWorkerTest.java
+│               │           └── repositories/
+│               │               ├── EmbeddedDataSourceTest.java
+│               │               └── ProductsReposutoryJdbcImplTest.java
+│               └── resources/
+│                   ├── data.csv
+│                   ├── data.sql
+│                   └── schema.sql
+└── ex03/
+    └── Tests/
+        ├── pom.xml
+        └── src/
+            ├── main/
+            │   └── java/
+            │       └── fr.42/
+            │               ├── exceptions/
+            │               │   └── AlreadyAuthenticatedException.java
+            │               ├── models/
+            │               │   ├── Product.java
+            │               │   └── User.java
+            │               ├── numbers/
+            │               │   ├── IllegalNumberException.java
+            │               │   └── NumberWorker.java
+            │               ├── repositories/
+            │               │   ├── ProductsRepository.java
+            │               │   ├── ProductsRepositoryJdbcImpl.java
+            │               │   └── UsersRepository.java
+            │               └── services/
+            │                   └── UsersServiceImpl.java
+            └── test/
+                ├── java/
+                │   └── fr.s42/
+                │           ├── numbers/
+                │           │   └── NumberWorkerTest.java
+                │           ├── repositories/
+                │           │   ├── EmbeddedDataSourceTest.java
+                │           │   └── ProductsReposutoryJdbcImplTest.java
+                │           └── services/
+                │               └── UsersServiceImplTest.java
+                └── resources/
+                    ├── data.csv
+                    ├── data.sql
+                    └── schema.sql
 ```
 
 ## Deployment

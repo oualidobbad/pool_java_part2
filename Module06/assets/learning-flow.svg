@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="220" viewBox="0 0 720 220" role="img" aria-label="Learning flow animation">
+  <defs>
+    <style>
+      .title { font: 700 18px monospace; fill: #111111; }
+      .step { font: 500 14px monospace; fill: #1f2937; }
+      .arrow { font: 700 16px monospace; fill: #1d4ed8; }
+    </style>
+  </defs>
+
+  <rect width="720" height="220" rx="16" ry="16" fill="#f8fafc" />
+  <text x="24" y="32" class="title">JUnit &amp; Mockito: Learning Flow</text>
+
+  <g opacity="0">
+    <text x="24" y="72" class="step">[ Pure logic tests ]</text>
+    <animate attributeName="opacity" values="0;1" dur="0.4s" begin="0s" fill="freeze" />
+  </g>
+
+  <g opacity="0">
+    <text x="40" y="96" class="arrow">↓</text>
+    <animate attributeName="opacity" values="0;1" dur="0.4s" begin="0.3s" fill="freeze" />
+  </g>
+
+  <g opacity="0">
+    <text x="24" y="120" class="step">[ In-memory DB + DataSource ]</text>
+    <animate attributeName="opacity" values="0;1" dur="0.4s" begin="0.6s" fill="freeze" />
+  </g>
+
+  <g opacity="0">
+    <text x="40" y="144" class="arrow">↓</text>
+    <animate attributeName="opacity" values="0;1" dur="0.4s" begin="0.9s" fill="freeze" />
+  </g>
+
+  <g opacity="0">
+    <text x="24" y="168" class="step">[ JDBC Repository + CRUD tests ]</text>
+    <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.2s" fill="freeze" />
+  </g>
+
+  <g opacity="0">
+    <text x="40" y="192" class="arrow">↓</text>
+    <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.5s" fill="freeze" />
+  </g>
+
+  <g opacity="0">
+    <text x="24" y="216" class="step">[ Service layer + Mockito mocks ]</text>
+    <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.8s" fill="freeze" />
+  </g>
+</svg>

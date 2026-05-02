@@ -1,4 +1,4 @@
-package rabat.s1337.classes;
+package classes;
 
 public class User
 {
@@ -23,6 +23,6 @@ public class User
 
 	@Override
 	public String toString() {
-		return "User{\n   first name: "+firstName+"\n   last name: "+lastName+"\n    height: "+height+"\n    age: "+age+"\n    }";
+		return "User[firstName='"+firstName+"', lastName='"+lastName+"', height="+height+", age="+age+"]";
 	}
 }

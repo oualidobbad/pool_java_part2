@@ -1,4 +1,4 @@
-package rabat.s1337.classes;
+package classes;
 
 public class Car
 {
@@ -13,14 +13,17 @@ public class Car
 		this.color = color;
 		this.price = price;
 	}
-
+	
 	public String changeColor(String color){
 		this.color = color;
 		return color;
 	}
-	
+	public void sold(){
+		price -= 50.0;
+		System.out.println(price);
+	}
 	@Override
 	public String toString() {
-		return "Car {\n   brand: "+brand+"\n   color: "+color+ "\n    price: "+price+"\n    }";
+		return "Car[brand='"+brand+"', color='"+color.toUpperCase()+ ", 'price="+price+"]";
 	}
 }

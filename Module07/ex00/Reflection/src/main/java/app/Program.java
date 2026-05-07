@@ -57,6 +57,7 @@ public class Program {
 	public static Object creatObject(Scanner sc, Class<?> clazz) throws Exception{
 		System.out.println("Let's create an object.");
 		Object obj = clazz.getDeclaredConstructor().newInstance();
+		
 		for (Field field : clazz.getDeclaredFields())
 		{
 			System.out.println(field.getName());

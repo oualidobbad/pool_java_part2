@@ -1,7 +1,6 @@
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-```
+
 # <span style="color:#4CAF50">Java Module 07 – Reflection & Annotations</span> 🚀
-```
 
 ***
 
@@ -61,9 +60,7 @@ Module07/
 
 ***
 
-```
 ## <span style="color:#FF9800">Exercise 00 – Work with Classes</span> 🔍
-```
 
 
 ### 🎯 Goal
@@ -123,9 +120,7 @@ During execution you should see a flow similar to the subject example: choose cl
 
 ***
 
-```
 ## <span style="color:#3F51B5">Exercise 01 – Annotations-SOURCE</span> 🧾
-```
 
 
 ### 🎯 Goal
@@ -152,9 +147,7 @@ Interaction:
 
 - `mvn clean compile` triggers the annotation processor.
 
-```
 - The processor finds all `@HtmlForm` classes, inspects their `@HtmlInput` fields, and writes an HTML file with `<form>` and `<input>` tags.[^1]
-```
 
 
 ### 🧠 Deep Dive – New Concepts
@@ -185,16 +178,12 @@ After compilation:
 
 - Check `target/classes` (or processor output directory) for `userform.html`.
 
-```
 - Open it in a browser; it should have a `<form>` with `<input>` elements matching the annotations on `UserForm`.[^1]
-```
 
 
 ***
 
-```
 ## <span style="color:#E91E63">Exercise 02 – ORM</span> 🗄️
-```
 
 
 ### 🎯 Goal
@@ -245,10 +234,7 @@ public class User {
         - `buildCreateTableSql(Class<?>)`
         - `save(Object entity)`
         - `update(Object entity)`
-
-```
-- `<T> T findById(Long id, Class<T> aClass)`  
-```
+        - `<T> T findById(Long id, Class<T> aClass)`
 
 
 ### 🧠 Deep Dive – New Concepts

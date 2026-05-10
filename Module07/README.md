@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # <span style="color:#4CAF50">Java Module 07 – Reflection & Annotations</span> 🚀
 
 ***
@@ -358,9 +356,6 @@ This README is designed to be the **front page of your GitHub repo**, showing th
 To tune this even better for you: which section do you want expanded with concrete code snippets next time you refer back (reflection console in ex00, annotation processor in ex01, or ORM manager in ex02)?
 
 <div align="center">⁂</div>
-
-[^1]: en.subject.pdf
-
 [^2]: OrmManager.java
 
 [^3]: https://jenkov.com/tutorials/java-reflection/annotations.html

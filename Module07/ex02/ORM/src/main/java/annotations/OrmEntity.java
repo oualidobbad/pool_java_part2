@@ -1,6 +1,5 @@
 package annotations;
 
-import javax.xml.stream.events.EndElement;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

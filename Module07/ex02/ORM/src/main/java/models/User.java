@@ -60,7 +60,7 @@ public class User {
     public void setAge(Integer age) {
         this.age = age;
     }
-
+    Object obj = new Object();
     @Override
     public String toString() {
         return "User{" +
